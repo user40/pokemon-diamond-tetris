@@ -1,0 +1,14 @@
+.vscode/
+
+/lua/CalcTas/scripts/*
+!/lua/CalcTas/scripts/sample_script.txt
+
+*_dump.txt
+*_par.txt
+*_parflat.txt
+*_par_rel.txt
+*_script.txt
+*_scriptDec.txt
+*_word.txt
+*_wordDec.txt
+*.bin
