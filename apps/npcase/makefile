@@ -8,7 +8,8 @@ TARGET			= markingACE_init_full
 VMA             = 0x0206DAB0
 
 # ===================================================================================================
-TARGET_VMA     = $(TARGET)_$(VMA)
+BUILDDIR		= ./build
+TARGET_VMA      = $(TARGET)_$(VMA)
 BIN             = $(TARGET_VMA).bin
 
 CC				= arm-none-eabi-gcc
@@ -19,15 +20,15 @@ TOOLS	= ../../tools
 
 all: clean egg
 
-$(BIN):
-	$(CC) $(TARGET).s -o $(TARGET_VMA) $(CFLAGS) $(LDFLAGS)
-	arm-none-eabi-objcopy -O binary $(TARGET_VMA) $(BIN)
-	arm-none-eabi-objdump -d $(TARGET_VMA) > $(TARGET_VMA)_dump.txt
-	rm $(TARGET_VMA)
+$(BUILDDIR)/$(BIN):
+	$(CC) $(TARGET).s -o $(BUILDDIR)/$(TARGET_VMA) $(CFLAGS) $(LDFLAGS)
+	arm-none-eabi-objcopy -O binary $(BUILDDIR)/$(TARGET_VMA) $(BUILDDIR)/$(BIN)
+	arm-none-eabi-objdump -d $(BUILDDIR)/$(TARGET_VMA) > $(BUILDDIR)/$(TARGET_VMA)_dump.txt
+	rm $(BUILDDIR)/$(TARGET_VMA)
 
-egg: $(BIN)
-	python3 make_egg.py $(BIN)
-	python3 ${TOOLS}/converter.py -i ${TARGET_VMA}_eggs.bin -o ${NAME}_eggs_par.txt --pointer -a 0x1E060 -p 0x02108818
+egg: $(BUILDDIR)/$(BIN)
+	python3 make_egg.py $(BUILDDIR)/$(BIN) $(BUILDDIR)/$(NAME)
+	python3 ${TOOLS}/converter.py -i $(BUILDDIR)/${NAME}_eggs.bin -o $(BUILDDIR)/${NAME}_eggs_par.txt --pointer -a 0x1E060 -p 0x02108818
 
 clean:
-	rm -rf $(NAME) *.txt *.bin
+	rm -rf $(BUILDDIR)/*

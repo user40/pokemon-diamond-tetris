@@ -1,10 +1,11 @@
-input_file = "eggsloader.bin"
-output_file = "eggsloader_egg.bin"
-
+import sys
 
 pid = 0x0000C000  # type 6	BACD
 
 def main():
+    input_file = sys.argv[1]
+    output_file = sys.argv[2]
+
     data = open(input_file, "rb").read()
     egg = bytearray(0x88)
     egg[0:4] = pid.to_bytes(4, 'little')

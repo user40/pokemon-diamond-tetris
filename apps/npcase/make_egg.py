@@ -27,6 +27,7 @@ def to_write_scritp(val, address):
 
 def main():
     input_path = sys.argv[1]
+    output_path = sys.argv[2]
     program = open(input_path, mode="rb").read()
     
     # Convert to the script
@@ -55,9 +56,9 @@ def main():
     egg2[0x28] = 1  # spiecies id
     egg2[0x30:0x30+len(script2)] = script2 # second block + 0x8
     
-    open(input_path.rstrip(".bin") + "_egg1.bin", mode="wb").write(egg1)
-    open(input_path.rstrip(".bin") + "_egg2.bin", mode="wb").write(egg2)
-    open(input_path.rstrip(".bin") + "_eggs.bin", mode="wb").write(egg1 + egg2)
+    open(output_path + "_egg00.bin", mode="wb").write(egg1)
+    open(output_path + "_egg01.bin", mode="wb").write(egg2)
+    open(output_path + "_eggs.bin", mode="wb").write(egg1 + egg2)
 
 
 if __name__ == "__main__":

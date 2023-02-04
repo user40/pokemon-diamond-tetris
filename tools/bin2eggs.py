@@ -36,7 +36,10 @@ def main():
     eggs[0] = egg_num   # eggNumber
     eggs[3] = 1         # AutoRun == TRUE
     
-    open(outpath, "wb").write(eggs)
+    open(outpath + "_eggs.bin", "wb").write(eggs)
+    for i in range(egg_num):
+        open(outpath + f"_egg{i:02}.bin", "wb").write(eggs[i*EGG_SIZE: (i+1)*EGG_SIZE])
+        
 
 
 def make_egg(data):
