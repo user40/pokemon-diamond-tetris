@@ -1,4 +1,6 @@
 all:
+	mkdir -p ./out
+	
 	cd apps/eggsloader && \
 	make && \
 	cp build/*_egg*.bin ../../out/

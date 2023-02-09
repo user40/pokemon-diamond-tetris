@@ -24,4 +24,4 @@ all: clean
 	$(TOOLS)/toEggs.sh $(BUILDDIR)/$(NAME).bin
 
 clean:
-	rm $(BUILDDIR)/*
+	rm -rf $(BUILDDIR)/*
