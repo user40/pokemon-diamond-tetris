@@ -18,7 +18,10 @@ LDFLAGS			= -Wl,--section-start=.text=$(VMA)
 
 TOOLS	= ../../tools
 
-all: clean egg
+all: clean $(BUILDDIR) egg
+
+$(BUILDDIR):
+	mkdir -p $(BUILDDIR)
 
 $(BUILDDIR)/$(BIN):
 	$(CC) $(TARGET).s -o $(BUILDDIR)/$(TARGET_VMA) $(CFLAGS) $(LDFLAGS)

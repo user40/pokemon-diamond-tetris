@@ -17,11 +17,14 @@ LIB				=
 
 TOOLS			= ../../tools
 
-all: clean
+all: clean $(BUILDDIR)
 	$(CC) $(CFLAGS) $(INC) $(LDFLAGS) $(SRCS) -o $(BUILDDIR)/$(NAME) ${LIB}
 	arm-none-eabi-objcopy -O binary $(BUILDDIR)/$(NAME) $(BUILDDIR)/$(NAME).bin
 	arm-none-eabi-objdump -d $(BUILDDIR)/$(NAME) > $(BUILDDIR)/$(NAME)_dump.txt
 	$(TOOLS)/toEggs.sh $(BUILDDIR)/$(NAME).bin
+
+$(BUILDDIR):
+	mkdir -p $(BUILDDIR)
 
 clean:
 	rm -rf $(BUILDDIR)/*
